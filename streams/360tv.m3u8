@@ -1,4 +1,4 @@
 #EXTM3U
 #EXT-X-VERSION:3
 #EXT-X-STREAM-INF:BANDWIDTH=2800000,RESOLUTION=1920x1080
-https://turkmedya-live.ercdn.net/tv360/tv360.m3u8|User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36
+https://turkmedya-live.ercdn.net/tv360/tv360_1080p.m3u8
