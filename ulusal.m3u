@@ -11,7 +11,7 @@ https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/showtv.m3u8
 #EXTINF:-1 tvg-id="startv.tr" tvg-logo="https://i.ibb.co/DfhKFsn/startv.png" group-title="",STAR TV
 https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/startv.m3u8
 #EXTINF:-1 tvg-id="nowhd.tr" tvg-logo="https://i.ibb.co/PFz93Zt/fox.png" group-title="",NOW TV
-https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/nowtv.m3u8
+https://nowtv.daioncdn.net/nowtv/nowtv.m3u8?ce=3&app=65fa8997-2b2f-4529-85ea-84318628a608&st=4-IYtqILQaXww5Aba06kdw&e=1793380036
 #EXTINF:-1 tvg-id="tv2hd.tr" tvg-logo="https://i.ibb.co/Q7gr5NM/teve2.png" group-title="",TEVE2
 https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/teve2.m3u8
 #EXTINF:-1 tvg-id="tv8.tr" tvg-logo="https://i.ibb.co/LpQgm9t/tv8.png" group-title="",TV8
