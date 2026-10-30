@@ -1,40 +1,40 @@
 #EXTM3U url-tvg="https://raw.githubusercontent.com/fuatcelep/itpv/main/EPGuide.xml"
 #EXTVLCOPT--http-reconnect=true
-#EXTINF:-1 tvg-id="trt1.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/main/logos/trt1.png" group-title="",TRT1
+#EXTINF:-1 tvg-id="trt1.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/itpv/main/logos/trt1.png" group-title="",TRT1
 https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/trt1.m3u8
-#EXTINF:-1 tvg-id="atv.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/main/logos/atv.png" group-title="",ATV
+#EXTINF:-1 tvg-id="atv.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/itpv/main/logos/atv.png" group-title="",ATV
 https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/atv.m3u8
-#EXTINF:-1 tvg-id="kanaldhd.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/main/logos/kanald.png" group-title="",KANAL D
+#EXTINF:-1 tvg-id="kanaldhd.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/itpv/main/logos/kanald.png" group-title="",KANAL D
 https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/kanald.m3u8
-#EXTINF:-1 tvg-id="showhd.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/main/logos/show.png" group-title="",SHOW TV
+#EXTINF:-1 tvg-id="showhd.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/itpv/main/logos/showtv.png" group-title="",SHOW TV
 https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/showtv.m3u8
-#EXTINF:-1 tvg-id="startv.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/main/logos/startv.png" group-title="",STAR TV
+#EXTINF:-1 tvg-id="startv.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/itpv/main/logos/startv.png" group-title="",STAR TV
 https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/startv.m3u8
-#EXTINF:-1 tvg-id="nowhd.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/main/logos/fox.png" group-title="",NOW TV
+#EXTINF:-1 tvg-id="nowhd.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/itpv/main/logos/nowtv.png" group-title="",NOW TV
 https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/nowtv.m3u8
-#EXTINF:-1 tvg-id="tv2hd.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/main/logos/teve2.png" group-title="",TEVE2
+#EXTINF:-1 tvg-id="tv2hd.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/itpv/main/logos/teve2.png" group-title="",TEVE2
 https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/teve2.m3u8
-#EXTINF:-1 tvg-id="tv8.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/main/logos/tv8.png" group-title="",TV8
+#EXTINF:-1 tvg-id="tv8.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/itpv/main/logos/tv8.png" group-title="",TV8
 https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/tv8.m3u8
-#EXTINF:-1 tvg-id="tv85.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/main/logos/tv85.png" group-title="",TV8.5
+#EXTINF:-1 tvg-id="tv85.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/itpv/main/logos/tv85.png" group-title="",TV8.5
 https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/tv85.m3u8
-#EXTINF:-1 tvg-id="ntv.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/main/logos/ntv.png" group-title="",NTV
+#EXTINF:-1 tvg-id="ntv.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/itpv/main/logos/ntv.png" group-title="",NTV
 https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/ntv.m3u8
-#EXTINF:-1 tvg-id="szc.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/main/logos/szctv.png" group-title="",SZC
+#EXTINF:-1 tvg-id="szc.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/itpv/main/logos/szc.png" group-title="",SZC
 https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/szc.m3u8
-#EXTINF:-1 tvg-id="halktvhd.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/main/logos/halktv.png" group-title="",HALK TV
+#EXTINF:-1 tvg-id="halktvhd.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/itpv/main/logos/halktv.png" group-title="",HALK TV
 https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/halktv.m3u8
-#EXTINF:-1 tvg-id="a2.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/main/logos/a2.png" group-title="",A2
+#EXTINF:-1 tvg-id="a2.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/itpv/main/logos/a2.png" group-title="",A2
 https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/a2.m3u8
-#EXTINF:-1 tvg-id="360hd.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/main/logos/360.png" group-title="",360 TV
+#EXTINF:-1 tvg-id="360hd.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/itpv/main/logos/360tv.png" group-title="",360 TV
 https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/360tv.m3u8
-#EXTINF:-1 tvg-id="cnntürkhd.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/main/logos/cnnturk.png" group-title="",CNN TÜRK
+#EXTINF:-1 tvg-id="cnntürkhd.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/itpv/main/logos/cnnturk.png" group-title="",CNN TÜRK
 https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/cnnturk.m3u8
-#EXTINF:-1 tvg-id="beinsportshaber.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/main/logos/beinsporthaber.png" group-title="",beIN SPORTS HABER
+#EXTINF:-1 tvg-id="beinsportshaber.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/itpv/main/logos/beinsportshaber.png" group-title="",beIN SPORTS HABER
 https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/beinsportshaber.m3u8
-#EXTINF:-1 tvg-id="aspor.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/main/logos/aspor.png" group-title="",A SPOR
+#EXTINF:-1 tvg-id="aspor.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/itpv/main/logos/aspor.png" group-title="",A SPOR
 https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/aspor.m3u8
-#EXTINF:-1 tvg-id="trtsporhd.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/main/logos/trtspor.png" group-title="",TRT SPOR
+#EXTINF:-1 tvg-id="trtsporhd.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/itpv/main/logos/trtspor.png" group-title="",TRT SPOR
 https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/trtspor.m3u8
-#EXTINF:-1 tvg-id="trtsporyildiz.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/main/logos/trtsporyildiz.png" group-title="",TRT SPOR YILDIZ
+#EXTINF:-1 tvg-id="trtsporyildiz.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/itpv/main/logos/trtsporyildiz.png" group-title="",TRT SPOR YILDIZ
 https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/trtsporyildiz.m3u8
