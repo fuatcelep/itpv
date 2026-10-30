@@ -1,0 +1,40 @@
+#EXTM3U url-tvg="https://raw.githubusercontent.com/fuatcelep/itpv/main/EPGuide.xml"
+#EXTVLCOPT--http-reconnect=true
+#EXTINF:-1 tvg-id="TRT1 HD" tvg-logo="https://i.ibb.co/87LNz27/trt1.png" group-title="",TRT 1
+https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/trt1.m3u8
+#EXTINF:-1 tvg-id="ATV" tvg-logo="https://i.ibb.co/NF9vZvZ/atv.png" group-title="",ATV
+https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/atv.m3u8
+#EXTINF:-1 tvg-id="KANAL D HD" tvg-logo="https://i.ibb.co/WGQP5Yv/kanald.png" group-title="",KANAL D
+https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/kanald.m3u8
+#EXTINF:-1 tvg-id="SHOW HD" tvg-logo="https://i.ibb.co/mvhCHGs/show.png" group-title="",SHOW TV
+https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/showtv.m3u8
+#EXTINF:-1 tvg-id="STAR TV" tvg-logo="https://i.ibb.co/DfhKFsn/startv.png" group-title="",STAR TV
+https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/startv.m3u8
+#EXTINF:-1 tvg-id="NOW HD" tvg-logo="https://i.ibb.co/PFz93Zt/fox.png" group-title="",NOW TV
+https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/nowtv.m3u8
+#EXTINF:-1 tvg-id="TV2 HD" tvg-logo="https://i.ibb.co/Q7gr5NM/teve2.png" group-title="",TEVE2
+https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/teve2.m3u8
+#EXTINF:-1 tvg-id="TV8" tvg-logo="https://i.ibb.co/LpQgm9t/tv8.png" group-title="",TV8
+https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/tv8.m3u8
+#EXTINF:-1 tvg-id="TV8 5" tvg-logo="https://i.ibb.co/CPK6shG/tv85.png" group-title="",TV8.5
+https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/tv85.m3u8
+#EXTINF:-1 tvg-id="NTV" tvg-logo="https://i.ibb.co/17NCV6G/ntv.png" group-title="",NTV
+https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/ntv.m3u8
+#EXTINF:-1 tvg-id="SZC" tvg-logo="https://i.ibb.co/6wDqGs8/szctv.png" group-title="",SZC
+https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/szc.m3u8
+#EXTINF:-1 tvg-id="HALK TV HD" tvg-logo="https://i.ibb.co/jWMY2V2/halktv.png" group-title="",HALK TV
+https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/halktv.m3u8
+#EXTINF:-1 tvg-id="A2" tvg-logo="https://i.ibb.co/DrZN4j5/a2.png" group-title="",A2
+https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/a2.m3u8
+#EXTINF:-1 tvg-id="360 HD" tvg-logo="https://i.ibb.co/26ZNCsn/360.png" group-title="",360 TV
+https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/360tv.m3u8
+#EXTINF:-1 tvg-id="CNN TÜRK HD" tvg-logo="https://i.ibb.co/qDsHc5V/cnnturk.png" group-title="",CNN TÜRK
+https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/cnnturk.m3u8
+#EXTINF:-1 tvg-id="beIN SPORTS HABER" tvg-logo="https://i.ibb.co/TRpwZkS/beinsporthaber.png" group-title="",beIN SPORTS HABER
+https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/beinsportshaber.m3u8
+#EXTINF:-1 tvg-id="A SPOR" tvg-logo="https://i.ibb.co/VmmygcD/aspor.png" group-title="",A SPOR
+https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/aspor.m3u8
+#EXTINF:-1 tvg-id="TRT SPOR HD" tvg-logo="https://i.ibb.co/nmv8QqZ/trtspor.png" group-title="",TRT SPOR
+https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/trtspor.m3u8
+#EXTINF:-1 tvg-id="TRT SPOR YILDIZ" tvg-logo="https://i.ibb.co/RbqPvgC/trtsporyildiz.png" group-title="",TRT SPOR YILDIZ
+https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/trtsporyildiz.m3u8
