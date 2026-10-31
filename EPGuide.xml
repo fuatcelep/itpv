@@ -304,7 +304,7 @@
     <display-name lang="tr">TİVİBU SPOR 4 HD</display-name>
     </channel>
   <channel id="tivibusporhd.tr">
-    <display-name lang="tr">TİVİBU SPOR HD </display-name>
+    <display-name lang="tr">TİVİBU SPOR HD</display-name>
     </channel>
   <channel id="cop31.tr">
     <display-name lang="tr">COP31</display-name>
@@ -18457,13 +18457,13 @@
     <title lang="tr">Nereye Bakıyor Bu Adamlar</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261031051500 +0300" stop="20261031080000 +0300">
-    <title lang="tr">İspanya Golf Turnuvası "Tekrar"</title>
+    <title lang="tr">İspanya Golf Turnuvası"/Tekrar"</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261031080000 +0300" stop="20261031113000 +0300">
-    <title lang="tr">Güney Kore Golf Turnuvası "Tkr"</title>
+    <title lang="tr">Güney Kore Golf Turnuvası"/Tkr"</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261031113000 +0300" stop="20261031133000 +0300">
-    <title lang="tr">Santos - Palmeiras "Tekrar"</title>
+    <title lang="tr">Santos - Palmeiras"/Tekrar"</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261031133000 +0300" stop="20261031153000 +0300">
     <title lang="tr">Manresa - Burgos ''Tekrar"</title>
@@ -18472,43 +18472,43 @@
     <title lang="tr">Barcelona-Zaragoza ''Tekrar''</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261031173000 +0300" stop="20261031204500 +0300">
-    <title lang="tr">Güney Kore Golf Turnuvası "Tkr"</title>
+    <title lang="tr">Güney Kore Golf Turnuvası"/Tkr"</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261031204500 +0300" stop="20261031230000 +0300">
-    <title lang="tr">Defensa-Independiente "Canlı"</title>
+    <title lang="tr">Defensa-Independiente"/Canlı"</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261031230000 +0300" stop="20261101011500 +0300">
-    <title lang="tr">Al Shamal - Al Hilal "Tekrar"</title>
+    <title lang="tr">Al Shamal - Al Hilal"/Tekrar"</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261101011500 +0300" stop="20261101031500 +0300">
-    <title lang="tr">Velez - San Lorenzo "Canlı"</title>
+    <title lang="tr">Velez - San Lorenzo"/Canlı"</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261101031500 +0300" stop="20261101034500 +0300">
     <title lang="tr">Monster Jam  ''Yarış''</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261101034500 +0300" stop="20261101054500 +0300">
-    <title lang="tr">Argentinos - I.Rivadavia "Tkr"</title>
+    <title lang="tr">Argentinos - I.Rivadavia"/Tkr"</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261101054500 +0300" stop="20261101080000 +0300">
-    <title lang="tr">Hindistan Golf Turnuvası "Tkr"</title>
+    <title lang="tr">Hindistan Golf Turnuvası"/Tkr"</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261101080000 +0300" stop="20261101113000 +0300">
-    <title lang="tr">Güney Kore Golf Turnuvası "Tkr"</title>
+    <title lang="tr">Güney Kore Golf Turnuvası"/Tkr"</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261101113000 +0300" stop="20261101133000 +0300">
-    <title lang="tr">Hwacheon - April "Canlı"</title>
+    <title lang="tr">Hwacheon - April"/Canlı"</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261101133000 +0300" stop="20261101153000 +0300">
-    <title lang="tr">Beijing Beikong-Kaya "Canlı"</title>
+    <title lang="tr">Beijing Beikong-Kaya"/Canlı"</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261101153000 +0300" stop="20261101173000 +0300">
-    <title lang="tr">Naegohyang-Ayeyawady "Canlı"</title>
+    <title lang="tr">Naegohyang-Ayeyawady"/Canlı"</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261101173000 +0300" stop="20261101193000 +0300">
     <title lang="tr">Ho Chi Minh-East Bengal"Canlı"</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261101193000 +0300" stop="20261101210000 +0300">
-    <title lang="tr">Güney Kore Golf Turnuvası "Tkr"</title>
+    <title lang="tr">Güney Kore Golf Turnuvası"/Tkr"</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261101210000 +0300" stop="20261101231500 +0300">
     <title lang="tr">Boca Jr</title>
@@ -18520,16 +18520,16 @@
     <title lang="tr">V</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261102031500 +0300" stop="20261102061500 +0300">
-    <title lang="tr">Güney Kore Golf Turnuvası "Tkr"</title>
+    <title lang="tr">Güney Kore Golf Turnuvası"/Tkr"</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261031051500 +0300" stop="20261031080000 +0300">
-    <title lang="tr">İspanya Golf Turnuvası "Tekrar"</title>
+    <title lang="tr">İspanya Golf Turnuvası"/Tekrar"</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261031080000 +0300" stop="20261031113000 +0300">
-    <title lang="tr">Güney Kore Golf Turnuvası "Tkr"</title>
+    <title lang="tr">Güney Kore Golf Turnuvası"/Tkr"</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261031113000 +0300" stop="20261031133000 +0300">
-    <title lang="tr">Santos - Palmeiras "Tekrar"</title>
+    <title lang="tr">Santos - Palmeiras"/Tekrar"</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261031133000 +0300" stop="20261031153000 +0300">
     <title lang="tr">Manresa - Burgos ''Tekrar"</title>
@@ -18538,43 +18538,43 @@
     <title lang="tr">Barcelona-Zaragoza ''Tekrar''</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261031173000 +0300" stop="20261031204500 +0300">
-    <title lang="tr">Güney Kore Golf Turnuvası "Tkr"</title>
+    <title lang="tr">Güney Kore Golf Turnuvası"/Tkr"</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261031204500 +0300" stop="20261031230000 +0300">
-    <title lang="tr">Defensa-Independiente "Canlı"</title>
+    <title lang="tr">Defensa-Independiente"/Canlı"</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261031230000 +0300" stop="20261101011500 +0300">
-    <title lang="tr">Al Shamal - Al Hilal "Tekrar"</title>
+    <title lang="tr">Al Shamal - Al Hilal"/Tekrar"</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261101011500 +0300" stop="20261101031500 +0300">
-    <title lang="tr">Velez - San Lorenzo "Canlı"</title>
+    <title lang="tr">Velez - San Lorenzo"/Canlı"</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261101031500 +0300" stop="20261101034500 +0300">
     <title lang="tr">Monster Jam  ''Yarış''</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261101034500 +0300" stop="20261101054500 +0300">
-    <title lang="tr">Argentinos - I.Rivadavia "Tkr"</title>
+    <title lang="tr">Argentinos - I.Rivadavia"/Tkr"</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261101054500 +0300" stop="20261101080000 +0300">
-    <title lang="tr">Hindistan Golf Turnuvası "Tkr"</title>
+    <title lang="tr">Hindistan Golf Turnuvası"/Tkr"</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261101080000 +0300" stop="20261101113000 +0300">
-    <title lang="tr">Güney Kore Golf Turnuvası "Tkr"</title>
+    <title lang="tr">Güney Kore Golf Turnuvası"/Tkr"</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261101113000 +0300" stop="20261101133000 +0300">
-    <title lang="tr">Hwacheon - April "Canlı"</title>
+    <title lang="tr">Hwacheon - April"/Canlı"</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261101133000 +0300" stop="20261101153000 +0300">
-    <title lang="tr">Beijing Beikong-Kaya "Canlı"</title>
+    <title lang="tr">Beijing Beikong-Kaya"/Canlı"</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261101153000 +0300" stop="20261101173000 +0300">
-    <title lang="tr">Naegohyang-Ayeyawady "Canlı"</title>
+    <title lang="tr">Naegohyang-Ayeyawady"/Canlı"</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261101173000 +0300" stop="20261101193000 +0300">
     <title lang="tr">Ho Chi Minh-East Bengal"Canlı"</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261101193000 +0300" stop="20261101210000 +0300">
-    <title lang="tr">Güney Kore Golf Turnuvası "Tkr"</title>
+    <title lang="tr">Güney Kore Golf Turnuvası"/Tkr"</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261101210000 +0300" stop="20261101231500 +0300">
     <title lang="tr">Boca Jr</title>
@@ -18586,49 +18586,49 @@
     <title lang="tr">V</title>
     </programme>
   <programme channel="sporsmart.tr" start="20261102031500 +0300" stop="20261102061500 +0300">
-    <title lang="tr">Güney Kore Golf Turnuvası "Tkr"</title>
+    <title lang="tr">Güney Kore Golf Turnuvası"/Tkr"</title>
     </programme>
   <programme channel="sporsmart2.tr" start="20261031051500 +0300" stop="20261031060000 +0300">
     <title lang="tr">Yabancı At Yarışları 2026</title>
     </programme>
   <programme channel="sporsmart2.tr" start="20261031060000 +0300" stop="20261031080000 +0300">
-    <title lang="tr">Fluminense-Internacional "Tkr"</title>
+    <title lang="tr">Fluminense-Internacional"/Tkr"</title>
     </programme>
   <programme channel="sporsmart2.tr" start="20261031080000 +0300" stop="20261031093000 +0300">
-    <title lang="tr">Smart Sahne "Tekrar"</title>
+    <title lang="tr">Smart Sahne"/Tekrar"</title>
     </programme>
   <programme channel="sporsmart2.tr" start="20261031093000 +0300" stop="20261031100000 +0300">
     <title lang="tr">Yabancı At Yarışları 2026</title>
     </programme>
   <programme channel="sporsmart2.tr" start="20261031100000 +0300" stop="20261031120000 +0300">
-    <title lang="tr">Gamba Osaka - Buriram "Tkr"</title>
+    <title lang="tr">Gamba Osaka - Buriram"/Tkr"</title>
     </programme>
   <programme channel="sporsmart2.tr" start="20261031120000 +0300" stop="20261031140000 +0300">
-    <title lang="tr">Dejeon - Vissel Kobe "Tekrar"</title>
+    <title lang="tr">Dejeon - Vissel Kobe"/Tekrar"</title>
     </programme>
   <programme channel="sporsmart2.tr" start="20261031140000 +0300" stop="20261031160000 +0300">
-    <title lang="tr">Nasaf - Kuwait "Tekrar"</title>
+    <title lang="tr">Nasaf - Kuwait"/Tekrar"</title>
     </programme>
   <programme channel="sporsmart2.tr" start="20261031160000 +0300" stop="20261031180000 +0300">
-    <title lang="tr">Gol Gohar - Arkadaq "Tekrar"</title>
+    <title lang="tr">Gol Gohar - Arkadaq"/Tekrar"</title>
     </programme>
   <programme channel="sporsmart2.tr" start="20261031180000 +0300" stop="20261031200000 +0300">
-    <title lang="tr">Al Jazira - Muharraq "Tekrar"</title>
+    <title lang="tr">Al Jazira - Muharraq"/Tekrar"</title>
     </programme>
   <programme channel="sporsmart2.tr" start="20261031200000 +0300" stop="20261031220000 +0300">
-    <title lang="tr">Zaragoza - Girona "Canlı"</title>
+    <title lang="tr">Zaragoza - Girona"/Canlı"</title>
     </programme>
   <programme channel="sporsmart2.tr" start="20261031220000 +0300" stop="20261101000000 +0300">
-    <title lang="tr">Leyma Coruna-Tenerife "Canlı"</title>
+    <title lang="tr">Leyma Coruna-Tenerife"/Canlı"</title>
     </programme>
   <programme channel="sporsmart2.tr" start="20261101000000 +0300" stop="20261101030000 +0300">
-    <title lang="tr">Güney Kore Golf Turnuvası "Tkr"</title>
+    <title lang="tr">Güney Kore Golf Turnuvası"/Tkr"</title>
     </programme>
   <programme channel="sporsmart2.tr" start="20261101030000 +0300" stop="20261101050000 +0300">
-    <title lang="tr">Santos - Palmeiras "Tekrar"</title>
+    <title lang="tr">Santos - Palmeiras"/Tekrar"</title>
     </programme>
   <programme channel="sporsmart2.tr" start="20261101050000 +0300" stop="20261101070000 +0300">
-    <title lang="tr">Adelaide - Lion City "Tekrar"</title>
+    <title lang="tr">Adelaide - Lion City"/Tekrar"</title>
     </programme>
   <programme channel="sporsmart2.tr" start="20261101070000 +0300" stop="20261101080000 +0300">
     <title lang="tr">Yabancı At Yarışları 2026</title>
@@ -18637,16 +18637,16 @@
     <title lang="tr">Salomon Kapadokya Ultra Trail</title>
     </programme>
   <programme channel="sporsmart2.tr" start="20261101093000 +0300" stop="20261101113000 +0300">
-    <title lang="tr">Tampiners-Svay Rieng "Tekrar"</title>
+    <title lang="tr">Tampiners-Svay Rieng"/Tekrar"</title>
     </programme>
   <programme channel="sporsmart2.tr" start="20261101113000 +0300" stop="20261101133000 +0300">
-    <title lang="tr">Inac Kobe-Bam Khaton "Canlı"</title>
+    <title lang="tr">Inac Kobe-Bam Khaton"/Canlı"</title>
     </programme>
   <programme channel="sporsmart2.tr" start="20261101133000 +0300" stop="20261101173000 +0300">
-    <title lang="tr">Güney Kore Golf Turnuvası "Tkr"</title>
+    <title lang="tr">Güney Kore Golf Turnuvası"/Tkr"</title>
     </programme>
   <programme channel="sporsmart2.tr" start="20261101173000 +0300" stop="20261101193000 +0300">
-    <title lang="tr">Melbourne - Nasaf "Canlı"</title>
+    <title lang="tr">Melbourne - Nasaf"/Canlı"</title>
     </programme>
   <programme channel="sporsmart2.tr" start="20261101193000 +0300" stop="20261101210000 +0300">
     <title lang="tr">Monster Jam  ''Yarış''</title>
@@ -18655,13 +18655,13 @@
     <title lang="tr">Unicaja - Barcelona ''Canlı''</title>
     </programme>
   <programme channel="sporsmart2.tr" start="20261101230000 +0300" stop="20261102010000 +0300">
-    <title lang="tr">S.Greenland-Machida "Tekrar"</title>
+    <title lang="tr">S.Greenland-Machida"/Tekrar"</title>
     </programme>
   <programme channel="sporsmart2.tr" start="20261102010000 +0300" stop="20261102030000 +0300">
-    <title lang="tr">Al Faisaly - Al Taawon "Tekrar"</title>
+    <title lang="tr">Al Faisaly - Al Taawon"/Tekrar"</title>
     </programme>
   <programme channel="sporsmart2.tr" start="20261102030000 +0300" stop="20261102050000 +0300">
-    <title lang="tr">Tampiners-Svay Rieng "Tekrar"</title>
+    <title lang="tr">Tampiners-Svay Rieng"/Tekrar"</title>
     </programme>
   <programme channel="sporsmart2.tr" start="20261102050000 +0300" stop="20261102080000 +0300">
     <title lang="tr">Eker Run 13</title>
@@ -20206,25 +20206,25 @@
     <title lang="tr">Efsaneler Diyarı</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031052500 +0300" stop="20261031055000 +0300">
-    <title lang="tr">Çizgi Film "Kare"</title>
+    <title lang="tr">Çizgi Film"/Kare"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031055000 +0300" stop="20261031060500 +0300">
-    <title lang="tr">Çizgi Film "Kaptan Pengu Ve Arkadaşları"</title>
+    <title lang="tr">Çizgi Film"/Kaptan Pengu Ve Arkadaşları"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031060500 +0300" stop="20261031062700 +0300">
-    <title lang="tr">Çizgi Film "İbi"</title>
+    <title lang="tr">Çizgi Film"/İbi"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031062700 +0300" stop="20261031063000 +0300">
     <title lang="tr">İstiklal Marşı</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031063000 +0300" stop="20261031065500 +0300">
-    <title lang="tr">Çizgi Film "Eymen ile Çimen"</title>
+    <title lang="tr">Çizgi Film"/Eymen ile Çimen"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031065500 +0300" stop="20261031072000 +0300">
-    <title lang="tr">Çizgi Film "Ege İle Gaga"</title>
+    <title lang="tr">Çizgi Film"/Ege İle Gaga"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031072000 +0300" stop="20261031073000 +0300">
-    <title lang="tr">Çizgi Film "El Feneri"</title>
+    <title lang="tr">Çizgi Film"/El Feneri"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031073000 +0300" stop="20261031075500 +0300">
     <title lang="tr">ÇocukÇUF</title>
@@ -20233,88 +20233,88 @@
     <title lang="tr">Kukla Stüdyosu</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031080500 +0300" stop="20261031082000 +0300">
-    <title lang="tr">Çizgi Film "Süper Tavşan"</title>
+    <title lang="tr">Çizgi Film"/Süper Tavşan"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031082000 +0300" stop="20261031083000 +0300">
-    <title lang="tr">Çizgi Film "Trafik Tayfa"</title>
+    <title lang="tr">Çizgi Film"/Trafik Tayfa"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031083000 +0300" stop="20261031085500 +0300">
-    <title lang="tr">Çizgi Film "Kaptan Pengu Ve Arkadaşları"</title>
+    <title lang="tr">Çizgi Film"/Kaptan Pengu Ve Arkadaşları"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031085500 +0300" stop="20261031090500 +0300">
-    <title lang="tr">Çizgi Film "Niloya"</title>
+    <title lang="tr">Çizgi Film"/Niloya"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031090500 +0300" stop="20261031093000 +0300">
-    <title lang="tr">Çizgi Film "Belle Ve Sebastian"</title>
+    <title lang="tr">Çizgi Film"/Belle Ve Sebastian"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031093000 +0300" stop="20261031095500 +0300">
-    <title lang="tr">Çizgi Film "İbi"</title>
+    <title lang="tr">Çizgi Film"/İbi"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031095500 +0300" stop="20261031100500 +0300">
-    <title lang="tr">Çizgi Film "Katuri"</title>
+    <title lang="tr">Çizgi Film"/Katuri"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031100500 +0300" stop="20261031102000 +0300">
-    <title lang="tr">Çizgi Film "Bing"</title>
+    <title lang="tr">Çizgi Film"/Bing"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031102000 +0300" stop="20261031103000 +0300">
-    <title lang="tr">Çizgi Film "Tuhafiye"</title>
+    <title lang="tr">Çizgi Film"/Tuhafiye"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031103000 +0300" stop="20261031110000 +0300">
-    <title lang="tr">Çizgi Film "Rafadan Tayfa"</title>
+    <title lang="tr">Çizgi Film"/Rafadan Tayfa"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031110000 +0300" stop="20261031113000 +0300">
-    <title lang="tr">Çizgi Film "Rafadan Tayfa"</title>
+    <title lang="tr">Çizgi Film"/Rafadan Tayfa"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031113000 +0300" stop="20261031114500 +0300">
-    <title lang="tr">Çizgi Film "Elif ve Arkadaşları"</title>
+    <title lang="tr">Çizgi Film"/Elif ve Arkadaşları"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031114500 +0300" stop="20261031115500 +0300">
-    <title lang="tr">Çizgi Film "Bay Do'nun Müzik Sınıfı"</title>
+    <title lang="tr">Çizgi Film"/Bay Do'nun Müzik Sınıfı"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031115500 +0300" stop="20261031122000 +0300">
     <title lang="tr">Maysa ve Bulut</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031122000 +0300" stop="20261031124500 +0300">
-    <title lang="tr">Çizgi Film "Heidi"</title>
+    <title lang="tr">Çizgi Film"/Heidi"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031124500 +0300" stop="20261031131000 +0300">
-    <title lang="tr">Çizgi Film "İbi"</title>
+    <title lang="tr">Çizgi Film"/İbi"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031131000 +0300" stop="20261031133000 +0300">
-    <title lang="tr">Çizgi Film "İbi"</title>
+    <title lang="tr">Çizgi Film"/İbi"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031133000 +0300" stop="20261031135500 +0300">
-    <title lang="tr">Çizgi Film "Nils ve Uçan Kaz</title>
+    <title lang="tr">Çizgi Film"/Nils ve Uçan Kaz</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031135500 +0300" stop="20261031142000 +0300">
-    <title lang="tr">Çizgi Film "Nasreddin Hoca Zaman Yolcusu"</title>
+    <title lang="tr">Çizgi Film"/Nasreddin Hoca Zaman Yolcusu"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031142000 +0300" stop="20261031143500 +0300">
-    <title lang="tr">Çizgi Film "Anadolu Rock"</title>
+    <title lang="tr">Çizgi Film"/Anadolu Rock"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031143500 +0300" stop="20261031150000 +0300">
     <title lang="tr">Köstebekgiller</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031150000 +0300" stop="20261031151500 +0300">
-    <title lang="tr">Çizgi Film "Ekip: Siberay"</title>
+    <title lang="tr">Çizgi Film"/Ekip: Siberay"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031151500 +0300" stop="20261031153000 +0300">
-    <title lang="tr">Çizgi Film "Resifistan"</title>
+    <title lang="tr">Çizgi Film"/Resifistan"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031153000 +0300" stop="20261031160000 +0300">
-    <title lang="tr">Çizgi Film "Rafadan Tayfa"</title>
+    <title lang="tr">Çizgi Film"/Rafadan Tayfa"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031160000 +0300" stop="20261031162500 +0300">
-    <title lang="tr">Çizgi Film "Belle Ve Sebastian"</title>
+    <title lang="tr">Çizgi Film"/Belle Ve Sebastian"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031162500 +0300" stop="20261031163500 +0300">
-    <title lang="tr">Çizgi Film "Z Takımı"</title>
+    <title lang="tr">Çizgi Film"/Z Takımı"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031163500 +0300" stop="20261031165000 +0300">
-    <title lang="tr">Çizgi Film "Trafik Tayfa"</title>
+    <title lang="tr">Çizgi Film"/Trafik Tayfa"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031165000 +0300" stop="20261031171500 +0300">
-    <title lang="tr">Çizgi Film "İbi"</title>
+    <title lang="tr">Çizgi Film"/İbi"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031171500 +0300" stop="20261031174000 +0300">
     <title lang="tr">Sürpriz Kutusu</title>
@@ -20323,73 +20323,73 @@
     <title lang="tr">Formulato</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031180500 +0300" stop="20261031183000 +0300">
-    <title lang="tr">Çizgi Film "Belle Ve Sebastian"</title>
+    <title lang="tr">Çizgi Film"/Belle Ve Sebastian"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031183000 +0300" stop="20261031185500 +0300">
-    <title lang="tr">Çizgi Film "Heidi"</title>
+    <title lang="tr">Çizgi Film"/Heidi"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031185500 +0300" stop="20261031191000 +0300">
-    <title lang="tr">Çizgi Film "Anadolu Rock"</title>
+    <title lang="tr">Çizgi Film"/Anadolu Rock"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031191000 +0300" stop="20261031192000 +0300">
     <title lang="tr">Haber Editörleri Kulübü</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031192000 +0300" stop="20261031195000 +0300">
-    <title lang="tr">Çizgi Film "Rafadan Tayfa"</title>
+    <title lang="tr">Çizgi Film"/Rafadan Tayfa"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031195000 +0300" stop="20261031200500 +0300">
     <title lang="tr">Haberin Olsun</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031200500 +0300" stop="20261031212000 +0300">
-    <title lang="tr">Sinema "İbi: Doğu Ekspresi'nin Gizemi"</title>
+    <title lang="tr">Sinema"/İbi: Doğu Ekspresi'nin Gizemi"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031212000 +0300" stop="20261031214500 +0300">
-    <title lang="tr">Çizgi Film "Dennis Ve Gnasher"</title>
+    <title lang="tr">Çizgi Film"/Dennis Ve Gnasher"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031214500 +0300" stop="20261031221000 +0300">
-    <title lang="tr">Çizgi Film "Heidi"</title>
+    <title lang="tr">Çizgi Film"/Heidi"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031221000 +0300" stop="20261031223500 +0300">
-    <title lang="tr">Çizgi Film "Kehribar ile Boncuk"</title>
+    <title lang="tr">Çizgi Film"/Kehribar ile Boncuk"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031223500 +0300" stop="20261031230000 +0300">
-    <title lang="tr">Çizgi Film "Rafadan Tayfa"</title>
+    <title lang="tr">Çizgi Film"/Rafadan Tayfa"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031230000 +0300" stop="20261031232500 +0300">
-    <title lang="tr">Çizgi Film "Babamın Gölgesi 1918"</title>
+    <title lang="tr">Çizgi Film"/Babamın Gölgesi 1918"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031232500 +0300" stop="20261031235000 +0300">
-    <title lang="tr">Çizgi Film "Nasreddin Hoca Zaman Yolcusu"</title>
+    <title lang="tr">Çizgi Film"/Nasreddin Hoca Zaman Yolcusu"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261031235000 +0300" stop="20261101001500 +0300">
-    <title lang="tr">Çizgi Film "Sagun"</title>
+    <title lang="tr">Çizgi Film"/Sagun"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261101001500 +0300" stop="20261101003500 +0300">
     <title lang="tr">Maysa ve Bulut</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261101003500 +0300" stop="20261101010000 +0300">
-    <title lang="tr">Çizgi Film "Aslan"</title>
+    <title lang="tr">Çizgi Film"/Aslan"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261101010000 +0300" stop="20261101011000 +0300">
-    <title lang="tr">Çizgi Film "Elif ve Arkadaşları"</title>
+    <title lang="tr">Çizgi Film"/Elif ve Arkadaşları"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261101011000 +0300" stop="20261101012500 +0300">
     <title lang="tr">Haberin Olsun</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261101012500 +0300" stop="20261101015000 +0300">
-    <title lang="tr">Çizgi Film "Doru"</title>
+    <title lang="tr">Çizgi Film"/Doru"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261101015000 +0300" stop="20261101020500 +0300">
-    <title lang="tr">Çizgi Film "Kaptan Pengu Ve Arkadaşları"</title>
+    <title lang="tr">Çizgi Film"/Kaptan Pengu Ve Arkadaşları"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261101020500 +0300" stop="20261101023000 +0300">
-    <title lang="tr">Çizgi Film "Ege İle Gaga"</title>
+    <title lang="tr">Çizgi Film"/Ege İle Gaga"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261101023000 +0300" stop="20261101025500 +0300">
-    <title lang="tr">Çizgi Film "Z Takımı"</title>
+    <title lang="tr">Çizgi Film"/Z Takımı"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261101025500 +0300" stop="20261101032000 +0300">
-    <title lang="tr">Çizgi Film "Kehribar ile Boncuk"</title>
+    <title lang="tr">Çizgi Film"/Kehribar ile Boncuk"</title>
     </programme>
   <programme channel="trtcocukhd.tr" start="20261101032000 +0300" stop="20261101034500 +0300">
     <title lang="tr">Aslan</title>
@@ -20617,10 +20617,10 @@
     <title lang="tr">Sormazsam Olmaz / 4</title>
     </programme>
   <programme channel="trtgenc.tr" start="20261031054500 +0300" stop="20261031063500 +0300">
-    <title lang="tr">Beynin Sırları "Secrets Of The Brain" / 16</title>
+    <title lang="tr">Beynin Sırları"/Secrets Of The Brain" / 16</title>
     </programme>
   <programme channel="trtgenc.tr" start="20261031063500 +0300" stop="20261031064000 +0300">
-    <title lang="tr">Dijital Dünya "Citizen Code" / 2</title>
+    <title lang="tr">Dijital Dünya"/Citizen Code" / 2</title>
     </programme>
   <programme channel="trtgenc.tr" start="20261031064000 +0300" stop="20261031065500 +0300">
     <title lang="tr">Farklı Kafalar / 6</title>
@@ -20635,13 +20635,13 @@
     <title lang="tr">Handico / 6</title>
     </programme>
   <programme channel="trtgenc.tr" start="20261031072500 +0300" stop="20261031073000 +0300">
-    <title lang="tr">Dijital Dünya "Citizen Code" / 2</title>
+    <title lang="tr">Dijital Dünya"/Citizen Code" / 2</title>
     </programme>
   <programme channel="trtgenc.tr" start="20261031073000 +0300" stop="20261031074500 +0300">
     <title lang="tr">Hayaller Oteli / 3</title>
     </programme>
   <programme channel="trtgenc.tr" start="20261031074500 +0300" stop="20261031080000 +0300">
-    <title lang="tr">Bilim Avcıları "Full Proof" / 15</title>
+    <title lang="tr">Bilim Avcıları"/Full Proof" / 15</title>
     </programme>
   <programme channel="trtgenc.tr" start="20261031080000 +0300" stop="20261031081500 +0300">
     <title lang="tr">Kahraman Anadolu / 2</title>
@@ -20665,7 +20665,7 @@
     <title lang="tr">Ya Kralsın Ya Viral / 3</title>
     </programme>
   <programme channel="trtgenc.tr" start="20261031101500 +0300" stop="20261031102000 +0300">
-    <title lang="tr">Dijital Dünya "Citizen Code" / 2</title>
+    <title lang="tr">Dijital Dünya"/Citizen Code" / 2</title>
     </programme>
   <programme channel="trtgenc.tr" start="20261031102000 +0300" stop="20261031103000 +0300">
     <title lang="tr">Merak Ettim / 3</title>
@@ -20737,7 +20737,7 @@
     <title lang="tr">Yeğenim Mutfakta / 2</title>
     </programme>
   <programme channel="trtgenc.tr" start="20261031151500 +0300" stop="20261031152000 +0300">
-    <title lang="tr">Doğanın Süper Kahramanları "Super Heroes" / 12</title>
+    <title lang="tr">Doğanın Süper Kahramanları"/Super Heroes" / 12</title>
     </programme>
   <programme channel="trtgenc.tr" start="20261031152000 +0300" stop="20261031154000 +0300">
     <title lang="tr">Sinan Akkol İle Tekno Mola / 8</title>
@@ -20827,13 +20827,13 @@
     <title lang="tr">Handico / 6</title>
     </programme>
   <programme channel="trtgenc.tr" start="20261101004000 +0300" stop="20261101004500 +0300">
-    <title lang="tr">Dijital Dünya "Citizen Code" / 2</title>
+    <title lang="tr">Dijital Dünya"/Citizen Code" / 2</title>
     </programme>
   <programme channel="trtgenc.tr" start="20261101004500 +0300" stop="20261101010000 +0300">
     <title lang="tr">Hayaller Oteli / 3</title>
     </programme>
   <programme channel="trtgenc.tr" start="20261101010000 +0300" stop="20261101011500 +0300">
-    <title lang="tr">Bilim Avcıları "Full Proof" / 15</title>
+    <title lang="tr">Bilim Avcıları"/Full Proof" / 15</title>
     </programme>
   <programme channel="trtgenc.tr" start="20261101011500 +0300" stop="20261101013000 +0300">
     <title lang="tr">Kahraman Anadolu / 2</title>
