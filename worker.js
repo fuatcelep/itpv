@@ -3,32 +3,12 @@ export default {
     const url = new URL(request.url);
     const ch = url.searchParams.get("ch");
     const sub = url.searchParams.get("sub");
-    const seg = url.searchParams.get("seg");
     const debug = url.searchParams.get("debug");
     const ref = url.searchParams.get("ref") || "";
     const ua = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36";
 
-    // 3. ASAMA: .ts Video Segment Proxy
-    if (seg) {
-      const segRes = await fetch(seg, {
-        headers: {
-          "User-Agent": ua,
-          ...(ref ? { "Referer": ref, "Origin": new URL(ref).origin } : {})
-        }
-      });
-      return new Response(segRes.body, {
-        status: segRes.status,
-        headers: {
-          "Content-Type": segRes.headers.get("Content-Type") || "video/MP2T",
-          "Access-Control-Allow-Origin": "*",
-          "Cache-Control": "public, max-age=10"
-        }
-      });
-    }
-
-    // 2. ASAMA: Alt akis (Media Playlist) Proxy'si
+    // 2. ASAMA: Alt akis (Media Playlist) Proxy'si (Kanal D, Show TV, Star, NTV, TRT1 vb. icin)
     if (sub) {
-      const useSegProxy = url.searchParams.get("proxy") === "1";
       const subRes = await fetch(sub, {
         headers: {
           "User-Agent": ua,
@@ -53,9 +33,6 @@ export default {
         if (!fullTsUrl.includes("?") && queryPart) {
           fullTsUrl += queryPart;
         }
-        if (useSegProxy) {
-          return `${url.origin}/?seg=${encodeURIComponent(fullTsUrl)}&ref=${encodeURIComponent(ref)}`;
-        }
         return fullTsUrl;
       }).join("\n");
 
@@ -68,44 +45,14 @@ export default {
       });
     }
 
-    if (!ch) return new Response("Worker Hazir! Ornek: ?ch=atv", { status: 200 });
+    if (!ch) return new Response("Worker Hazir! Ornek: ?ch=kanald", { status: 200 });
 
     let masterUrl = "";
     let referer = "";
-    let needSegProxy = false;
 
     try {
-      // 1. Cloudflare'in anlik token alabildigi kanallar
-      if (ch === "atv" || ch === "aspor" || ch === "a2") {
-        needSegProxy = true;
-        const map = {
-          atv:   { slug: "atv",   app: "d1ce2d40-5256-4550-b02e-e73c185a314e", ref: "https://www.atv.com.tr/" },
-          aspor: { slug: "aspor", app: "b6bf3b55-0120-4e0f-983b-a6c7969f9ec6", ref: "https://www.aspor.com.tr/" },
-          a2:    { slug: "a2tv",  app: "59363a60-be96-4f73-9eff-355d0ff2c758", ref: "https://www.atv.com.tr/" }
-        };
-        const c = map[ch];
-        referer = c.ref;
-        const tokenApi = `https://securevideotoken.tmgrup.com.tr/webtv/secure?000000&url=https%3A%2F%2Ftrkvz.daioncdn.net%2F${c.slug}%2F${c.slug}.m3u8%3Fce%3D3%26app%3D${c.app}`;
-        const r = await fetch(tokenApi, {
-          headers: { "User-Agent": ua, "Referer": referer, "Origin": new URL(referer).origin }
-        });
-        if (r.ok) {
-          const j = await r.json();
-          masterUrl = j.Url || "";
-        }
-      } else if (ch === "nowtv") {
-        // NOW TV icin dogrudan canli-yayin sayfasindan tokenli m3u8 cek, cekemezse BluTV/Daion yedegine gec
-        referer = "https://www.nowtv.com.tr/";
-        const r = await fetch("https://www.nowtv.com.tr/canli-yayin", { headers: { "User-Agent": ua } });
-        if (r.ok) {
-          const html = await r.text();
-          const m = html.replace(/\\\//g, "/").match(/https:\/\/[^"'<> ]*(?:ercdn|daioncdn|nowtv)[^"'<> ]*\.m3u8[^"'<> ]*/);
-          if (m) masterUrl = m[0].replace(/&amp;/g, "&");
-        }
-        if (!masterUrl) {
-          masterUrl = "https://foxtvdvr.blutv.com/blutv_foxtv_dvr2/live.m3u8";
-        }
-      } else if (ch === "kanald") {
+      // 1. Cloudflare'in 403 almadan dogrudan cozebildigi kanallar
+      if (ch === "kanald") {
         referer = "https://www.kanald.com.tr/";
         masterUrl = "https://demiroren.daioncdn.net/kanald/kanald.m3u8?app=kanald_web&ce=3";
       } else if (ch === "teve2") {
@@ -128,12 +75,24 @@ export default {
         masterUrl = "https://tv8.daioncdn.net/tv8bucuk/tv8bucuk.m3u8?app=tv8bucuk_web&ce=3";
       }
 
-      // Eger yukaridan alinmadiysa Vu+'in GitHub'a attigi streams/<ch>.m3u8 dosyasindan oku
+      // 2. ATV, A SPOR, A2, NOW TV, TRT1, CNN TURK vb. icin:
+      // Once Vu+ Duo 4K'nin GitHub'a yukledigi streams/<ch>.m3u8 dosyasini oku!
       if (!masterUrl) {
         const ghRawUrl = `https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/${ch}.m3u8?t=${Date.now()}`;
         const ghRes = await fetch(ghRawUrl, { headers: { "Cache-Control": "no-cache" } });
         if (ghRes.ok) {
           const ghText = await ghRes.text();
+          // Eger Cloudflare 403 aliyorsa (atv, aspor, a2, nowtv, cnnturk),
+          // Worker icinde fetch yapmadan DOGRUDAN Vu+'in cozdugu m3u8 icerigini oynaticiya ver!
+          if (["atv", "aspor", "a2", "nowtv", "cnnturk", "szc", "beinsportshaber"].includes(ch)) {
+            return new Response(ghText, {
+              headers: {
+                "Content-Type": "application/vnd.apple.mpegurl",
+                "Access-Control-Allow-Origin": "*",
+                "Cache-Control": "no-store"
+              }
+            });
+          }
           masterUrl = ghText.replace(/\r/g, "").split("\n").find(l => l.trim().startsWith("http"))?.trim() || "";
         }
       }
@@ -142,8 +101,7 @@ export default {
 
       // Master M3U8 icinden alt akisi coz
       let subUrl = masterUrl;
-      let mStatus = 0;
-      let mPreview = "";
+      let mStatus = 200;
 
       if (!masterUrl.includes("_1080") && !masterUrl.includes("_720") && !masterUrl.includes("track_")) {
         const mRes = await fetch(masterUrl, {
@@ -157,7 +115,6 @@ export default {
         const baseDir = cleanUrl.substring(0, cleanUrl.lastIndexOf("/") + 1);
         const hostRoot = new URL(effUrl).origin;
         const mText = await mRes.text();
-        mPreview = mText.substring(0, 300);
 
         if (mText.includes("#EXT-X-STREAM-INF")) {
           const lines = mText.replace(/\r/g, "").split("\n").filter(l => l && !l.startsWith("#"));
@@ -174,12 +131,12 @@ export default {
       }
 
       if (debug === "1") {
-        return new Response(JSON.stringify({ ch, masterUrl, mStatus, subUrl, mPreview }, null, 2), {
+        return new Response(JSON.stringify({ ch, masterUrl, mStatus, subUrl }, null, 2), {
           headers: { "Content-Type": "application/json" }
         });
       }
 
-      const proxySubUrl = `${url.origin}/?sub=${encodeURIComponent(subUrl)}&ref=${encodeURIComponent(referer)}&proxy=${needSegProxy ? "1" : "0"}`;
+      const proxySubUrl = `${url.origin}/?sub=${encodeURIComponent(subUrl)}&ref=${encodeURIComponent(referer)}`;
       const outM3u8 = `#EXTM3U\n#EXT-X-VERSION:3\n#EXT-X-STREAM-INF:BANDWIDTH=2800000,RESOLUTION=1920x1080\n${proxySubUrl}\n`;
 
       return new Response(outM3u8, {
