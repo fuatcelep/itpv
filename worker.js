@@ -3,12 +3,34 @@ export default {
     const url = new URL(request.url);
     const ch = url.searchParams.get("ch");
     const sub = url.searchParams.get("sub");
+    const seg = url.searchParams.get("seg");
     const ref = url.searchParams.get("ref") || "";
+    const country = request.cf?.country || "TR";
+    const isAbroad = country !== "TR";
     const clientIp = request.headers.get("CF-Connecting-IP") || "";
     const ua = request.headers.get("User-Agent") || "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1";
 
-    // Alt akis (Media Playlist) Proxy'si (Kanal D, Show TV, Star, NTV, TV8, Teve2 icin)
+    // 3. ASAMA: Yurt disindaki izleyiciler icin .ts Video Segment Proxy
+    if (seg) {
+      const segRes = await fetch(seg, {
+        headers: {
+          "User-Agent": ua,
+          ...(ref ? { "Referer": ref, "Origin": new URL(ref).origin } : {})
+        }
+      });
+      return new Response(segRes.body, {
+        status: segRes.status,
+        headers: {
+          "Content-Type": segRes.headers.get("Content-Type") || "video/MP2T",
+          "Access-Control-Allow-Origin": "*",
+          "Cache-Control": "public, max-age=10"
+        }
+      });
+    }
+
+    // 2. ASAMA: Alt akis (Media Playlist) Proxy'si
     if (sub) {
+      const useSegProxy = url.searchParams.get("proxy") === "1";
       const subRes = await fetch(sub, {
         headers: {
           "User-Agent": ua,
@@ -33,6 +55,9 @@ export default {
         if (!fullTsUrl.includes("?") && queryPart) {
           fullTsUrl += queryPart;
         }
+        if (useSegProxy) {
+          return `${url.origin}/?seg=${encodeURIComponent(fullTsUrl)}&ref=${encodeURIComponent(ref)}`;
+        }
         return fullTsUrl;
       }).join("\n");
 
@@ -45,10 +70,35 @@ export default {
       });
     }
 
-    if (!ch) return new Response("Worker Hazir! Ornek: ?ch=trtspor", { status: 200 });
+    if (!ch) return new Response(`Worker Hazir! Ulke: ${country}`, { status: 200 });
 
     try {
-      // 1. TRT GRUBU, HALK TV, 360 TV: Dogrudan 302 Redirect (Geo-Block'a takilmaz, aninda acilir!)
+      // EGER IZLEYICI YURT DISINDAYSA (country !== "TR"):
+      // Yurt disinda Cloudflare sunucusu da Geo-Block yedigi icin,
+      // DOGRUDAN Vu+ Duo 4K'nin Turkiye IP'siyle cozup GitHub'a attigi streams/<ch>.m3u8 linkini kullan!
+      if (isAbroad) {
+        const ghRawUrl = `https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/${ch}.m3u8?t=${Date.now()}`;
+        const ghRes = await fetch(ghRawUrl, { headers: { "Cache-Control": "no-cache" } });
+        if (ghRes.ok) {
+          const ghText = await ghRes.text();
+          const trStreamUrl = ghText.replace(/\r/g, "").split("\n").find(l => l.trim().startsWith("http"))?.trim();
+          if (trStreamUrl) {
+            const proxySubUrl = `${url.origin}/?sub=${encodeURIComponent(trStreamUrl)}&ref=${encodeURIComponent("https://www.tv8.com.tr/")}&proxy=1`;
+            const outM3u8 = `#EXTM3U\n#EXT-X-VERSION:3\n#EXT-X-STREAM-INF:BANDWIDTH=2800000,RESOLUTION=1920x1080\n${proxySubUrl}\n`;
+            return new Response(outM3u8, {
+              headers: {
+                "Content-Type": "application/vnd.apple.mpegurl",
+                "Access-Control-Allow-Origin": "*",
+                "Cache-Control": "no-store"
+              }
+            });
+          }
+        }
+      }
+
+      // --- BURADAN AŞAĞISI TÜRKİYE İÇİNDEKİ İZLEYİCİLER İÇİNDİR (Mevcut Çalışan Yapı) ---
+
+      // 1. TRT GRUBU, HALK TV, 360 TV: Dogrudan 302 Redirect
       const directMap = {
         trt1:          "https://tv-trt1.medya.trt.com.tr/master.m3u8",
         trtspor:       "https://tv-trtspor1.medya.trt.com.tr/master.m3u8",
@@ -60,7 +110,7 @@ export default {
         return Response.redirect(directMap[ch], 302);
       }
 
-      // 2. ATV, A SPOR, A2: Taze token alip 302 Redirect ile dogrudan oynaticiya yonlendir
+      // 2. ATV, A SPOR, A2
       if (ch === "atv" || ch === "aspor" || ch === "a2") {
         const map = {
           atv:   { slug: "atv",   app: "d1ce2d40-5256-4550-b02e-e73c185a314e", ref: "https://www.atv.com.tr/" },
@@ -83,7 +133,7 @@ export default {
         }
       }
 
-      // 3. NOW TV: Canli yayin sayfasindan taze token alip 302 Redirect ile yonlendir
+      // 3. NOW TV
       if (ch === "nowtv") {
         const nowRes = await fetch("https://www.nowtv.com.tr/canli-yayin", {
           headers: { "User-Agent": ua, "X-Forwarded-For": clientIp }
@@ -95,7 +145,7 @@ export default {
         }
       }
 
-      // 4. CNN TURK: Duhnet API'den taze token alip 302 Redirect ile yonlendir
+      // 4. CNN TURK
       if (ch === "cnnturk") {
         const cnnRes = await fetch(`https://www.cnnturk.com/action/media/62d6814670380e2cdc7c124c?_=${Date.now()}`, {
           headers: { "User-Agent": ua, "Referer": "https://www.cnnturk.com/canli-yayin", "X-Forwarded-For": clientIp }
@@ -110,7 +160,7 @@ export default {
         }
       }
 
-      // 5. SZC ve beIN SPORTS HABER: GitHub'daki guncel linki alip 302 Redirect ile yonlendir
+      // 5. SZC ve beIN SPORTS HABER
       if (ch === "szc" || ch === "beinsportshaber") {
         const ghRawUrl = `https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/${ch}.m3u8?t=${Date.now()}`;
         const ghRes = await fetch(ghRawUrl, { headers: { "Cache-Control": "no-cache" } });
@@ -121,7 +171,7 @@ export default {
         }
       }
 
-      // 6. KANAL D, SHOW TV, STAR TV, NTV, TEVE2, TV8, TV8.5 (Worker Proxy ile OK verenler)
+      // 6. KANAL D, SHOW TV, STAR TV, NTV, TEVE2, TV8, TV8.5
       let masterUrl = "";
       let referer = "";
 
