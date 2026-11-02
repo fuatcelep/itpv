@@ -7,6 +7,7 @@ export default {
     const ts = Math.floor(Date.now() / 1000);
     const ua = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36";
 
+    // Alt akis (sub-playlist) proxy yapisi
     if (sub) {
       const subRes = await fetch(sub, {
         headers: { "User-Agent": ua, ...(ref ? { "Referer": ref, "Origin": new URL(ref).origin } : {}) }
@@ -25,11 +26,15 @@ export default {
       }).join("\n");
 
       return new Response(text, {
-        headers: { "Content-Type": "application/vnd.apple.mpegurl", "Access-Control-Allow-Origin": "*", "Cache-Control": "no-store" }
+        headers: {
+          "Content-Type": "application/vnd.apple.mpegurl",
+          "Access-Control-Allow-Origin": "*",
+          "Cache-Control": "no-store"
+        }
       });
     }
 
-    if (!ch) return new Response("Worker Hazir! Ornek: ?ch=kanald", { status: 200 });
+    if (!ch) return new Response("Worker Hazir! Ornek kullanim: ?ch=kanald", { status: 200 });
 
     let masterUrl = "";
     let referer = "";
@@ -78,30 +83,32 @@ export default {
           referer = "https://www.tv8.com.tr/";
           masterUrl = "https://tv8.daioncdn.net/tv8bucuk/tv8bucuk.m3u8?app=tv8bucuk_web&ce=3";
           break;
-        case "showtv": {
+        case "showtv":
           referer = "https://www.showtv.com.tr/";
-          const html = await (await fetch("https://www.showtv.com.tr/canli-yayin", { headers: { "User-Agent": ua } })).text();
-          const m = html.replace(/\\\//g, "/").match(/https:\/\/ciner\.daioncdn\.net\/showtv\/showtv[^"'<> ]+\.m3u8[^"'<> ]*/);
-          masterUrl = m ? m[0].replace(/&amp;/g, "&") : "";
+          // Bot korumasini asmak icin dogrudan Daion CDN API parametrelerini kullaniyoruz
+          masterUrl = "https://ciner.daioncdn.net/showtv/showtv.m3u8?ce=3&app=showtv_web";
           break;
-        }
-        case "nowtv": {
-          const html = await (await fetch("https://www.nowtv.com.tr/canli-yayin", { headers: { "User-Agent": "Mozilla/5.0" } })).text();
-          const m = html.replace(/\\\//g, "/").match(/https:\/\/[^"'<> ]*(?:ercdn|daioncdn|nowtv)[^"'<> ]*\.m3u8[^"'<> ]*/);
-          masterUrl = m ? m[0].replace(/&amp;/g, "&") : "";
+        case "nowtv":
+          referer = "https://www.nowtv.com.tr/";
+          // NOW TV'nin CDN API adresiyle bypass ediyoruz
+          masterUrl = "https://fox-now-live.daioncdn.net/nowtv/nowtv.m3u8?ce=3&app=nowtv_web";
           break;
-        }
         case "cnnturk": {
           referer = "https://www.cnnturk.com/canli-yayin";
           const j = await (await fetch(`https://www.cnnturk.com/action/media/62d6814670380e2cdc7c124c?_=${ts}`, { headers: { "User-Agent": ua, "Referer": referer } })).json();
-          masterUrl = (j?.Media?.Link?.ServiceUrl || "") + (j?.Media?.Link?.SecurePath || "");
+          const srv = j?.Media?.Link?.ServiceUrl || "";
+          const path = j?.Media?.Link?.SecurePath || "";
+          masterUrl = srv + path;
           break;
         }
       }
 
       if (!masterUrl) return new Response("Master URL alinamadi", { status: 404 });
 
-      const mRes = await fetch(masterUrl, { headers: { "User-Agent": ua, ...(referer ? { "Referer": referer } : {}) }, redirect: "follow" });
+      const mRes = await fetch(masterUrl, {
+        headers: { "User-Agent": ua, ...(referer ? { "Referer": referer } : {}) },
+        redirect: "follow"
+      });
       const effUrl = mRes.url;
       const baseDir = effUrl.split("?")[0].substring(0, effUrl.split("?")[0].lastIndexOf("/") + 1);
       const hostRoot = new URL(effUrl).origin;
@@ -119,9 +126,16 @@ export default {
       }
 
       const proxySubUrl = `${url.origin}/?sub=${encodeURIComponent(subUrl)}&ref=${encodeURIComponent(referer)}`;
-      return new Response(`#EXTM3U\n#EXT-X-VERSION:3\n#EXT-X-STREAM-INF:BANDWIDTH=2800000,RESOLUTION=1920x1080\n${proxySubUrl}\n`, {
-        headers: { "Content-Type": "application/vnd.apple.mpegurl", "Access-Control-Allow-Origin": "*", "Cache-Control": "no-store" }
+      const wrapperM3u8 = `#EXTM3U\n#EXT-X-VERSION:3\n#EXT-X-STREAM-INF:BANDWIDTH=2800000,RESOLUTION=1920x1080\n${proxySubUrl}\n`;
+
+      return new Response(wrapperM3u8, {
+        headers: {
+          "Content-Type": "application/vnd.apple.mpegurl",
+          "Access-Control-Allow-Origin": "*",
+          "Cache-Control": "no-store"
+        }
       });
+
     } catch (e) {
       return new Response("Hata: " + e.message, { status: 500 });
     }
