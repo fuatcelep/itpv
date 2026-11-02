@@ -7,7 +7,7 @@ export default {
     const clientIp = request.headers.get("CF-Connecting-IP") || "";
     const ua = request.headers.get("User-Agent") || "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1";
 
-    // Alt akis (Media Playlist) Proxy'si (Kanal D, Show TV, Star, NTV, TRT1 vb. icin)
+    // Alt akis (Media Playlist) Proxy'si (Kanal D, Show TV, Star, NTV, TV8, Teve2 icin)
     if (sub) {
       const subRes = await fetch(sub, {
         headers: {
@@ -45,10 +45,22 @@ export default {
       });
     }
 
-    if (!ch) return new Response("Worker Hazir! Ornek: ?ch=kanald", { status: 200 });
+    if (!ch) return new Response("Worker Hazir! Ornek: ?ch=trtspor", { status: 200 });
 
     try {
-      // 1. ATV, A SPOR, A2: Taze token al ve Worker icinde fetch yapmadan DOGRUDAN oynaticiya yonlendir (302 Redirect)
+      // 1. TRT GRUBU, HALK TV, 360 TV: Dogrudan 302 Redirect (Geo-Block'a takilmaz, aninda acilir!)
+      const directMap = {
+        trt1:          "https://tv-trt1.medya.trt.com.tr/master.m3u8",
+        trtspor:       "https://tv-trtspor1.medya.trt.com.tr/master.m3u8",
+        trtsporyildiz: "https://tv-trtspor2.medya.trt.com.tr/master.m3u8",
+        halktv:        "https://halktv-live.daioncdn.net/halktv/halktv.m3u8",
+        "360tv":       "https://turkmedya-live.ercdn.net/tv360/tv360.m3u8"
+      };
+      if (directMap[ch]) {
+        return Response.redirect(directMap[ch], 302);
+      }
+
+      // 2. ATV, A SPOR, A2: Taze token alip 302 Redirect ile dogrudan oynaticiya yonlendir
       if (ch === "atv" || ch === "aspor" || ch === "a2") {
         const map = {
           atv:   { slug: "atv",   app: "d1ce2d40-5256-4550-b02e-e73c185a314e", ref: "https://www.atv.com.tr/" },
@@ -67,12 +79,11 @@ export default {
         });
         const j = await r.json();
         if (j && j.Url) {
-          // Worker fetch yapmaz (403 yemez!), dogrudan senin telefonunu taze linke 302 ile yonlendirir!
           return Response.redirect(j.Url, 302);
         }
       }
 
-      // 2. NOW TV: Dogrudan BluTV/ERCdn uzerindeki IP kilitsiz canli yayin akisi
+      // 3. NOW TV: Canli yayin sayfasindan taze token alip 302 Redirect ile yonlendir
       if (ch === "nowtv") {
         const nowRes = await fetch("https://www.nowtv.com.tr/canli-yayin", {
           headers: { "User-Agent": ua, "X-Forwarded-For": clientIp }
@@ -84,7 +95,33 @@ export default {
         }
       }
 
-      // 3. Diger tum kanallar (Kanal D, Show TV, Star TV, NTV, TRT1, TV8 vb.)
+      // 4. CNN TURK: Duhnet API'den taze token alip 302 Redirect ile yonlendir
+      if (ch === "cnnturk") {
+        const cnnRes = await fetch(`https://www.cnnturk.com/action/media/62d6814670380e2cdc7c124c?_=${Date.now()}`, {
+          headers: { "User-Agent": ua, "Referer": "https://www.cnnturk.com/canli-yayin", "X-Forwarded-For": clientIp }
+        });
+        if (cnnRes.ok) {
+          const j = await cnnRes.json();
+          const srv = j?.Media?.Link?.ServiceUrl || "";
+          const path = j?.Media?.Link?.SecurePath || "";
+          if (srv && path) {
+            return Response.redirect(srv + path, 302);
+          }
+        }
+      }
+
+      // 5. SZC ve beIN SPORTS HABER: GitHub'daki guncel linki alip 302 Redirect ile yonlendir
+      if (ch === "szc" || ch === "beinsportshaber") {
+        const ghRawUrl = `https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/${ch}.m3u8?t=${Date.now()}`;
+        const ghRes = await fetch(ghRawUrl, { headers: { "Cache-Control": "no-cache" } });
+        if (ghRes.ok) {
+          const ghText = await ghRes.text();
+          const targetUrl = ghText.replace(/\r/g, "").split("\n").find(l => l.trim().startsWith("http"))?.trim();
+          if (targetUrl) return Response.redirect(targetUrl, 302);
+        }
+      }
+
+      // 6. KANAL D, SHOW TV, STAR TV, NTV, TEVE2, TV8, TV8.5 (Worker Proxy ile OK verenler)
       let masterUrl = "";
       let referer = "";
 
@@ -109,41 +146,30 @@ export default {
       } else if (ch === "tv85") {
         referer = "https://www.tv8.com.tr/";
         masterUrl = "https://tv8.daioncdn.net/tv8bucuk/tv8bucuk.m3u8?app=tv8bucuk_web&ce=3";
-      } else {
-        const ghRawUrl = `https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/${ch}.m3u8?t=${Date.now()}`;
-        const ghRes = await fetch(ghRawUrl, { headers: { "Cache-Control": "no-cache" } });
-        if (ghRes.ok) {
-          const ghText = await ghRes.text();
-          masterUrl = ghText.replace(/\r/g, "").split("\n").find(l => l.trim().startsWith("http"))?.trim() || "";
-        }
       }
 
       if (!masterUrl) return new Response("Yayin linki bulunamadi", { status: 404 });
 
-      let subUrl = masterUrl;
-      if (!masterUrl.includes("_1080") && !masterUrl.includes("_720") && !masterUrl.includes("track_")) {
-        const mRes = await fetch(masterUrl, {
-          headers: { "User-Agent": ua, ...(referer ? { "Referer": referer, "Origin": new URL(referer).origin } : {}) },
-          redirect: "follow"
-        });
-        const effUrl = mRes.url;
-        const cleanUrl = effUrl.split("?")[0];
-        const queryPart = effUrl.includes("?") ? "?" + effUrl.split("?") : "";
-        const baseDir = cleanUrl.substring(0, cleanUrl.lastIndexOf("/") + 1);
-        const hostRoot = new URL(effUrl).origin;
-        const mText = await mRes.text();
+      const mRes = await fetch(masterUrl, {
+        headers: { "User-Agent": ua, ...(referer ? { "Referer": referer, "Origin": new URL(referer).origin } : {}) },
+        redirect: "follow"
+      });
+      const effUrl = mRes.url;
+      const cleanUrl = effUrl.split("?")[0];
+      const queryPart = effUrl.includes("?") ? "?" + effUrl.split("?") : "";
+      const baseDir = cleanUrl.substring(0, cleanUrl.lastIndexOf("/") + 1);
+      const hostRoot = new URL(effUrl).origin;
+      const mText = await mRes.text();
 
-        if (mText.includes("#EXT-X-STREAM-INF")) {
-          const lines = mText.replace(/\r/g, "").split("\n").filter(l => l && !l.startsWith("#"));
-          let picked = lines.find(l => /1080|720/i.test(l)) || lines[lines.length - 1];
-          if (picked) {
-            if (picked.startsWith("http")) subUrl = picked;
-            else if (picked.startsWith("/")) subUrl = hostRoot + picked;
-            else subUrl = baseDir + picked;
-            if (!subUrl.includes("?") && queryPart) subUrl += queryPart;
-          }
-        } else {
-          subUrl = effUrl;
+      let subUrl = effUrl;
+      if (mText.includes("#EXT-X-STREAM-INF")) {
+        const lines = mText.replace(/\r/g, "").split("\n").filter(l => l && !l.startsWith("#"));
+        let picked = lines.find(l => /1080|720/i.test(l)) || lines[lines.length - 1];
+        if (picked) {
+          if (picked.startsWith("http")) subUrl = picked;
+          else if (picked.startsWith("/")) subUrl = hostRoot + picked;
+          else subUrl = baseDir + picked;
+          if (!subUrl.includes("?") && queryPart) subUrl += queryPart;
         }
       }
 
