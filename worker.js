@@ -3,11 +3,11 @@ export default {
     const url = new URL(request.url);
     const ch = url.searchParams.get("ch");
     const sub = url.searchParams.get("sub");
-    const debug = url.searchParams.get("debug");
     const ref = url.searchParams.get("ref") || "";
-    const ua = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36";
+    const clientIp = request.headers.get("CF-Connecting-IP") || "";
+    const ua = request.headers.get("User-Agent") || "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1";
 
-    // 2. ASAMA: Alt akis (Media Playlist) Proxy'si (Kanal D, Show TV, Star, NTV, TRT1 vb. icin)
+    // Alt akis (Media Playlist) Proxy'si (Kanal D, Show TV, Star, NTV, TRT1 vb. icin)
     if (sub) {
       const subRes = await fetch(sub, {
         headers: {
@@ -47,11 +47,47 @@ export default {
 
     if (!ch) return new Response("Worker Hazir! Ornek: ?ch=kanald", { status: 200 });
 
-    let masterUrl = "";
-    let referer = "";
-
     try {
-      // 1. Cloudflare'in 403 almadan dogrudan cozebildigi kanallar
+      // 1. ATV, A SPOR, A2: Taze token al ve Worker icinde fetch yapmadan DOGRUDAN oynaticiya yonlendir (302 Redirect)
+      if (ch === "atv" || ch === "aspor" || ch === "a2") {
+        const map = {
+          atv:   { slug: "atv",   app: "d1ce2d40-5256-4550-b02e-e73c185a314e", ref: "https://www.atv.com.tr/" },
+          aspor: { slug: "aspor", app: "b6bf3b55-0120-4e0f-983b-a6c7969f9ec6", ref: "https://www.aspor.com.tr/" },
+          a2:    { slug: "a2tv",  app: "59363a60-be96-4f73-9eff-355d0ff2c758", ref: "https://www.atv.com.tr/" }
+        };
+        const c = map[ch];
+        const tokenApi = `https://securevideotoken.tmgrup.com.tr/webtv/secure?${Date.now()}&url=https%3A%2F%2Ftrkvz.daioncdn.net%2F${c.slug}%2F${c.slug}.m3u8%3Fce%3D3%26app%3D${c.app}`;
+        const r = await fetch(tokenApi, {
+          headers: {
+            "User-Agent": ua,
+            "Referer": c.ref,
+            "Origin": new URL(c.ref).origin,
+            "X-Forwarded-For": clientIp
+          }
+        });
+        const j = await r.json();
+        if (j && j.Url) {
+          // Worker fetch yapmaz (403 yemez!), dogrudan senin telefonunu taze linke 302 ile yonlendirir!
+          return Response.redirect(j.Url, 302);
+        }
+      }
+
+      // 2. NOW TV: Dogrudan BluTV/ERCdn uzerindeki IP kilitsiz canli yayin akisi
+      if (ch === "nowtv") {
+        const nowRes = await fetch("https://www.nowtv.com.tr/canli-yayin", {
+          headers: { "User-Agent": ua, "X-Forwarded-For": clientIp }
+        });
+        const html = await nowRes.text();
+        const m = html.replace(/\\\//g, "/").match(/https:\/\/[^"'<> ]*(?:ercdn|daioncdn|nowtv)[^"'<> ]*\.m3u8[^"'<> ]*/);
+        if (m) {
+          return Response.redirect(m[0].replace(/&amp;/g, "&"), 302);
+        }
+      }
+
+      // 3. Diger tum kanallar (Kanal D, Show TV, Star TV, NTV, TRT1, TV8 vb.)
+      let masterUrl = "";
+      let referer = "";
+
       if (ch === "kanald") {
         referer = "https://www.kanald.com.tr/";
         masterUrl = "https://demiroren.daioncdn.net/kanald/kanald.m3u8?app=kanald_web&ce=3";
@@ -73,42 +109,23 @@ export default {
       } else if (ch === "tv85") {
         referer = "https://www.tv8.com.tr/";
         masterUrl = "https://tv8.daioncdn.net/tv8bucuk/tv8bucuk.m3u8?app=tv8bucuk_web&ce=3";
-      }
-
-      // 2. ATV, A SPOR, A2, NOW TV, TRT1, CNN TURK vb. icin:
-      // Once Vu+ Duo 4K'nin GitHub'a yukledigi streams/<ch>.m3u8 dosyasini oku!
-      if (!masterUrl) {
+      } else {
         const ghRawUrl = `https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/${ch}.m3u8?t=${Date.now()}`;
         const ghRes = await fetch(ghRawUrl, { headers: { "Cache-Control": "no-cache" } });
         if (ghRes.ok) {
           const ghText = await ghRes.text();
-          // Eger Cloudflare 403 aliyorsa (atv, aspor, a2, nowtv, cnnturk),
-          // Worker icinde fetch yapmadan DOGRUDAN Vu+'in cozdugu m3u8 icerigini oynaticiya ver!
-          if (["atv", "aspor", "a2", "nowtv", "cnnturk", "szc", "beinsportshaber"].includes(ch)) {
-            return new Response(ghText, {
-              headers: {
-                "Content-Type": "application/vnd.apple.mpegurl",
-                "Access-Control-Allow-Origin": "*",
-                "Cache-Control": "no-store"
-              }
-            });
-          }
           masterUrl = ghText.replace(/\r/g, "").split("\n").find(l => l.trim().startsWith("http"))?.trim() || "";
         }
       }
 
       if (!masterUrl) return new Response("Yayin linki bulunamadi", { status: 404 });
 
-      // Master M3U8 icinden alt akisi coz
       let subUrl = masterUrl;
-      let mStatus = 200;
-
       if (!masterUrl.includes("_1080") && !masterUrl.includes("_720") && !masterUrl.includes("track_")) {
         const mRes = await fetch(masterUrl, {
           headers: { "User-Agent": ua, ...(referer ? { "Referer": referer, "Origin": new URL(referer).origin } : {}) },
           redirect: "follow"
         });
-        mStatus = mRes.status;
         const effUrl = mRes.url;
         const cleanUrl = effUrl.split("?")[0];
         const queryPart = effUrl.includes("?") ? "?" + effUrl.split("?") : "";
@@ -128,12 +145,6 @@ export default {
         } else {
           subUrl = effUrl;
         }
-      }
-
-      if (debug === "1") {
-        return new Response(JSON.stringify({ ch, masterUrl, mStatus, subUrl }, null, 2), {
-          headers: { "Content-Type": "application/json" }
-        });
       }
 
       const proxySubUrl = `${url.origin}/?sub=${encodeURIComponent(subUrl)}&ref=${encodeURIComponent(referer)}`;
