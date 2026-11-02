@@ -3,32 +3,32 @@ export default {
     const url = new URL(request.url);
     const ch = url.searchParams.get("ch");
     const sub = url.searchParams.get("sub");
+    const seg = url.searchParams.get("seg");
+    const ref = url.searchParams.get("ref") || "";
+    const ts = Math.floor(Date.now() / 1000);
     const ua = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36";
 
-    // Kanal bazli Referer tablosu
-    const refMap = {
-      trt1: "https://www.trtizle.com/",
-      trtspor: "https://www.trtizle.com/",
-      trtsporyildiz: "https://www.trtizle.com/",
-      atv: "https://www.atv.com.tr/",
-      aspor: "https://www.aspor.com.tr/",
-      a2: "https://www.atv.com.tr/",
-      kanald: "https://www.kanald.com.tr/",
-      teve2: "https://www.teve2.com.tr/",
-      startv: "https://puhutv.com/",
-      ntv: "https://puhutv.com/",
-      showtv: "https://www.showtv.com.tr/",
-      nowtv: "https://www.nowtv.com.tr/",
-      tv8: "https://www.tv8.com.tr/",
-      tv85: "https://www.tv8.com.tr/",
-      cnnturk: "https://www.cnnturk.com/",
-      halktv: "https://halktv.com.tr/",
-      "360tv": "https://www.tv360.com.tr/"
-    };
+    // 3. ASAMA: .ts Video Segment Proxy (ATV, NOW TV gibi IP/Referer kilidi olan kanallar icin)
+    if (seg) {
+      const segRes = await fetch(seg, {
+        headers: {
+          "User-Agent": ua,
+          ...(ref ? { "Referer": ref, "Origin": new URL(ref).origin } : {})
+        }
+      });
+      return new Response(segRes.body, {
+        status: segRes.status,
+        headers: {
+          "Content-Type": segRes.headers.get("Content-Type") || "video/MP2T",
+          "Access-Control-Allow-Origin": "*",
+          "Cache-Control": "public, max-age=10"
+        }
+      });
+    }
 
-    // 2. ASAMA: Alt akis (Media Playlist) Proxy'si (.ts linklerini tam URL yapar)
+    // 2. ASAMA: Alt akis (Media Playlist) Proxy'si
     if (sub) {
-      const ref = url.searchParams.get("ref") || "";
+      const useSegProxy = url.searchParams.get("proxy") === "1";
       const subRes = await fetch(sub, {
         headers: {
           "User-Agent": ua,
@@ -38,6 +38,7 @@ export default {
 
       const effUrl = subRes.url;
       const cleanUrl = effUrl.split("?")[0];
+      const queryPart = effUrl.includes("?") ? "?" + effUrl.split("?") : "";
       const baseDir = cleanUrl.substring(0, cleanUrl.lastIndexOf("/") + 1);
       const hostRoot = new URL(effUrl).origin;
       let text = await subRes.text();
@@ -45,9 +46,19 @@ export default {
       text = text.split("\n").map(line => {
         const l = line.trim();
         if (!l || l.startsWith("#")) return line;
-        if (l.startsWith("http")) return l;
-        if (l.startsWith("/")) return hostRoot + l;
-        return baseDir + l;
+        let fullTsUrl = l;
+        if (!l.startsWith("http")) {
+          fullTsUrl = l.startsWith("/") ? (hostRoot + l) : (baseDir + l);
+        }
+        // Eger segmentte token yoksa ve ana linkte varsa ekle
+        if (!fullTsUrl.includes("?") && queryPart) {
+          fullTsUrl += queryPart;
+        }
+        // IP/Header kilidi olan kanallarda .ts parcasini da Worker uzerinden gecir
+        if (useSegProxy) {
+          return `${url.origin}/?seg=${encodeURIComponent(fullTsUrl)}&ref=${encodeURIComponent(ref)}`;
+        }
+        return fullTsUrl;
       }).join("\n");
 
       return new Response(text, {
@@ -59,29 +70,95 @@ export default {
       });
     }
 
-    if (!ch) return new Response("Worker Hazir! Ornek: ?ch=trt1", { status: 200 });
+    if (!ch) return new Response("Worker Hazir! Ornek: ?ch=atv", { status: 200 });
+
+    let masterUrl = "";
+    let referer = "";
+    let needSegProxy = false;
 
     try {
-      // 1. ASAMA: Vu+ Duo 4K'nin GitHub'a yukledigi streams/<kanal>.m3u8 dosyasini oku!
-      const ghRawUrl = `https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/${ch}.m3u8?t=${Date.now()}`;
-      const ghRes = await fetch(ghRawUrl, { headers: { "Cache-Control": "no-cache" } });
-
-      if (!ghRes.ok) {
-        return new Response(`GitHub'da streams/${ch}.m3u8 bulunamadi (${ghRes.status})`, { status: 404 });
+      // 1. Oncelikle Cloudflare'in kendi basina anlik cozebildigi kanallar (Token'i Worker IP'sine alir)
+      if (ch === "atv" || ch === "aspor" || ch === "a2") {
+        needSegProxy = true;
+        const map = {
+          atv:   { slug: "atv",   app: "d1ce2d40-5256-4550-b02e-e73c185a314e", ref: "https://www.atv.com.tr/" },
+          aspor: { slug: "aspor", app: "b6bf3b55-0120-4e0f-983b-a6c7969f9ec6", ref: "https://www.aspor.com.tr/" },
+          a2:    { slug: "a2tv",  app: "59363a60-be96-4f73-9eff-355d0ff2c758", ref: "https://www.atv.com.tr/" }
+        };
+        const c = map[ch];
+        referer = c.ref;
+        const tokenApi = `https://securevideotoken.tmgrup.com.tr/webtv/secure?000000&url=https%3A%2F%2Ftrkvz.daioncdn.net%2F${c.slug}%2F${c.slug}.m3u8%3Fce%3D3%26app%3D${c.app}`;
+        const r = await fetch(tokenApi, {
+          headers: { "User-Agent": ua, "Referer": referer, "Origin": new URL(referer).origin }
+        });
+        if (r.ok) {
+          const j = await r.json();
+          masterUrl = j.Url || "";
+        }
+      } else if (ch === "kanald") {
+        referer = "https://www.kanald.com.tr/";
+        masterUrl = "https://demiroren.daioncdn.net/kanald/kanald.m3u8?app=kanald_web&ce=3";
+      } else if (ch === "teve2") {
+        referer = "https://www.teve2.com.tr/";
+        masterUrl = "https://demiroren.daioncdn.net/teve2/teve2.m3u8?ce=3&app=6aab838a-437e-4a1b-bbd0-e30f79cdbbbd";
+      } else if (ch === "startv") {
+        referer = "https://puhutv.com/";
+        masterUrl = "https://dogus.daioncdn.net/startv/startv.m3u8?ce=3&app=7a318fc3-c9cf-4587-b62e-900166ef7190";
+      } else if (ch === "ntv") {
+        referer = "https://puhutv.com/";
+        masterUrl = "https://dogus.daioncdn.net/ntv/ntv.m3u8?ce=3&app=4f0228e3-6605-42f4-9507-d9fe2d9789bd";
+      } else if (ch === "showtv") {
+        referer = "https://www.showtv.com.tr/";
+        masterUrl = "https://ciner.daioncdn.net/showtv/showtv.m3u8?ce=3&app=showtv_web";
+      } else if (ch === "tv8") {
+        referer = "https://www.tv8.com.tr/";
+        masterUrl = "https://tv8.daioncdn.net/tv8/tv8.m3u8?app=7ddc255a-ef47-4e81-ab14-c0e5f2949788&ce=3";
+      } else if (ch === "tv85") {
+        referer = "https://www.tv8.com.tr/";
+        masterUrl = "https://tv8.daioncdn.net/tv8bucuk/tv8bucuk.m3u8?app=tv8bucuk_web&ce=3";
       }
 
-      const ghText = await ghRes.text();
-      // Vu+'in yazdigi #EXTM3U icindeki asil stream URL'sini al
-      const streamUrl = ghText.replace(/\r/g, "").split("\n").find(l => l.trim().startsWith("http"))?.trim();
-
-      if (!streamUrl) {
-        return new Response("m3u8 icinde gecerli URL bulunamadi", { status: 404 });
+      // Eger yukaridan alinmadiysa (TRT1, NOW TV, CNN Turk, Halk TV, 360, SZC vb.)
+      // dogrudan Vu+ Duo 4K'nin GitHub'a attigi streams/<ch>.m3u8 dosyasindan oku!
+      if (!masterUrl) {
+        const ghRawUrl = `https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/${ch}.m3u8?t=${Date.now()}`;
+        const ghRes = await fetch(ghRawUrl, { headers: { "Cache-Control": "no-cache" } });
+        if (ghRes.ok) {
+          const ghText = await ghRes.text();
+          masterUrl = ghText.replace(/\r/g, "").split("\n").find(l => l.trim().startsWith("http"))?.trim() || "";
+        }
+        if (ch === "nowtv" || ch === "cnnturk") needSegProxy = true;
       }
 
-      const referer = refMap[ch] || "";
+      if (!masterUrl) return new Response("Yayin linki bulunamadi", { status: 404 });
 
-      // Oynaticiyi Cloudflare Worker'in alt akis proxy'sine yonlendir
-      const proxySubUrl = `${url.origin}/?sub=${encodeURIComponent(streamUrl)}&ref=${encodeURIComponent(referer)}`;
+      // Master M3U8 ise alt akisi coz, degilse (zaten alt akissa) dogrudan kullan
+      let subUrl = masterUrl;
+      if (!masterUrl.includes("_1080") && !masterUrl.includes("_720") && !masterUrl.includes("track_")) {
+        const mRes = await fetch(masterUrl, {
+          headers: { "User-Agent": ua, ...(referer ? { "Referer": referer, "Origin": new URL(referer).origin } : {}) },
+          redirect: "follow"
+        });
+        const effUrl = mRes.url;
+        const cleanUrl = effUrl.split("?")[0];
+        const baseDir = cleanUrl.substring(0, cleanUrl.lastIndexOf("/") + 1);
+        const hostRoot = new URL(effUrl).origin;
+        const mText = await mRes.text();
+
+        if (mText.includes("#EXT-X-STREAM-INF")) {
+          const lines = mText.replace(/\r/g, "").split("\n").filter(l => l && !l.startsWith("#"));
+          let picked = lines.find(l => /1080|720/i.test(l)) || lines[lines.length - 1];
+          if (picked) {
+            if (picked.startsWith("http")) subUrl = picked;
+            else if (picked.startsWith("/")) subUrl = hostRoot + picked;
+            else subUrl = baseDir + picked;
+          }
+        } else {
+          subUrl = effUrl;
+        }
+      }
+
+      const proxySubUrl = `${url.origin}/?sub=${encodeURIComponent(subUrl)}&ref=${encodeURIComponent(referer)}&proxy=${needSegProxy ? "1" : "0"}`;
       const outM3u8 = `#EXTM3U\n#EXT-X-VERSION:3\n#EXT-X-STREAM-INF:BANDWIDTH=2800000,RESOLUTION=1920x1080\n${proxySubUrl}\n`;
 
       return new Response(outM3u8, {
