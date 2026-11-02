@@ -20,8 +20,6 @@ https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/tv8.m3u8
 https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/tv85.m3u8
 #EXTINF:-1 tvg-id="ntv.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/itpv/main/logos/ntv.png",NTV
 https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/ntv.m3u8
-#EXTINF:-1 tvg-id="szc.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/itpv/main/logos/szc.png",SZC
-https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/szc.m3u8
 #EXTINF:-1 tvg-id="halktvhd.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/itpv/main/logos/halktv.png",HALK TV
 https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/halktv.m3u8
 #EXTINF:-1 tvg-id="a2.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/itpv/main/logos/a2.png",A2
@@ -30,8 +28,6 @@ https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/a2.m3u8
 https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/360tv.m3u8
 #EXTINF:-1 tvg-id="cnntürkhd.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/itpv/main/logos/cnnturk.png",CNN TÜRK
 https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/cnnturk.m3u8
-#EXTINF:-1 tvg-id="beinsportshaber.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/itpv/main/logos/beinsportshaber.png",beIN SPORTS HABER
-https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/beinsportshaber.m3u8
 #EXTINF:-1 tvg-id="aspor.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/itpv/main/logos/aspor.png",A SPOR
 https://raw.githubusercontent.com/fuatcelep/itpv/main/streams/aspor.m3u8
 #EXTINF:-1 tvg-id="trtsporhd.tr" tvg-logo="https://raw.githubusercontent.com/fuatcelep/itpv/main/logos/trtspor.png",TRT SPOR
